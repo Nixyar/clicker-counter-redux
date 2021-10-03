@@ -4,7 +4,7 @@ const reducer = (state = 0, action) => {
             return state + 1;
         case 'DEC':
             return state - 1;
-        case 'REF':
+        case 'REFR':
             return state = 0;
         default:
             return state;
