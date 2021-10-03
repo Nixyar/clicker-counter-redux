@@ -1,26 +1,14 @@
 import {createStore} from "redux";
+import {Provider} from "react-redux";
+import App from "./components/app";
+import reducer from "./reducer";
+import React from "react";
+import ReactDOM from "react-dom";
 
-document.getElementById('count').innerText = `0`;
+const store = createStore(reducer);
 
-const reducer = (state = 0, action) => {
-    switch (action.type) {
-        case 'inc':
-        return state + 1;
-        case 'dec':
-            return state - 1;
-        case 'ref':
-            return state = 0;
-        default:
-            return state;
-    }
-}
-
-const store = createStore(reducer, 0);
-
-store.subscribe(() => {
-    return document.getElementById('count').innerText = `${store.getState()}`;
-});
-
-document.getElementById('countPlus').addEventListener('click', () => store.dispatch({type: 'inc'}));
-document.getElementById('countMinus').addEventListener('click', () => store.dispatch({type: 'dec'}));
-document.getElementById('countRefresh').addEventListener('click', () => store.dispatch({type: 'ref'}));
+ReactDOM.render(
+    <Provider store={store}>
+        <App/>
+    </Provider>, document.getElementById('root')
+);
